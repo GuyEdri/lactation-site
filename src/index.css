@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FFF9EC;
+  --color-linen: #F5EFE6;
+  --color-peach: #E8B4A0;
+  --color-peach-dark: #D9A18C;
+  --color-sage: #9CAE98;
+  --color-olive: #5D6B5E;
+  --color-charcoal: #4A4543;
+  --color-warm-gray: #6B6663;
+  
+  --font-heading: "Lora", serif;
+  --font-body: "Nunito", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
