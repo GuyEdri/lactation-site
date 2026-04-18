@@ -40,6 +40,29 @@ const tips = [
   "Laid-back positions can make latching easier"
 ]
 
+const services = [
+  {
+    title: "One-on-One Consultations",
+    description: "Personalized support for latching, positioning, and milk supply concerns",
+    icon: "🤱"
+  },
+  {
+    title: "Virtual Sessions",
+    description: "Convenient online consultations from the comfort of your home",
+    icon: "💻"
+  },
+  {
+    title: "Prenatal Education",
+    description: "Preparing for a successful breastfeeding journey before baby arrives",
+    icon: "📚"
+  },
+  {
+    title: "Pumping & Return-to-Work",
+    description: "Guidance on pumping strategies and maintaining supply when returning to work",
+    icon: "🍼"
+  }
+]
+
 const shuffleArray = (array) => {
   const shuffled = [...array]
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -76,20 +99,73 @@ function App() {
       </header>
 
       <section className="py-16 px-4 text-center">
-        <h2 className="text-4xl md:text-5xl font-heading text-charcoal mb-4 max-w-3xl mx-auto">
-          Gentle support for your breastfeeding journey
-        </h2>
-        <p className="text-xl text-warm-gray mb-8 max-w-2xl mx-auto">
-          Evidence-based care that meets you where you are
-        </p>
-        <a
-          href={whatsappLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block bg-peach hover:bg-peach-dark text-white font-semibold py-4 px-8 rounded-full transition-colors duration-300"
-        >
-          Let's Connect
-        </a>
+        <div className="max-w-4xl mx-auto">
+          <img 
+            src="https://images.unsplash.com/photo-1555244162-803834f70033?w=600&h=400&fit=crop" 
+            alt="Mother and baby" 
+            className="w-full h-64 md:h-80 object-cover rounded-2xl mb-8 shadow-lg"
+          />
+          <p className="text-peach font-semibold mb-2">IBCLC Certified Lactation Consultant</p>
+          <h2 className="text-4xl md:text-5xl font-heading text-charcoal mb-4 max-w-3xl mx-auto">
+            Gentle support for your breastfeeding journey
+          </h2>
+          <p className="text-xl text-warm-gray mb-8 max-w-2xl mx-auto">
+            Evidence-based care that meets you where you are. Every family is welcome here.
+          </p>
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-peach hover:bg-peach-dark text-white font-semibold py-4 px-8 rounded-full transition-colors duration-300"
+          >
+            Let's Connect
+          </a>
+        </div>
+      </section>
+
+      <section className="py-16 px-4 bg-linen">
+        <div className="max-w-4xl mx-auto">
+          <h3 className="text-3xl font-heading text-charcoal text-center mb-8">
+            About Me
+          </h3>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <img 
+                src="https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?w=500&h=400&fit=crop" 
+                alt="Breastfeeding support" 
+                className="w-full h-64 object-cover rounded-xl shadow-md"
+              />
+            </div>
+            <div className="text-warm-gray">
+              <p className="mb-4">
+                I'm passionate about helping families navigate their unique breastfeeding journey with confidence and joy. With gentle, evidence-based support, I meet you where you are.
+              </p>
+              <p>
+                Whether you're expecting your first baby or facing challenges with your current journey, I'm here to provide the guidance and encouragement you need.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 px-4">
+        <div className="max-w-5xl mx-auto">
+          <h3 className="text-3xl font-heading text-charcoal text-center mb-4">
+            How Can I Help?
+          </h3>
+          <p className="text-center text-warm-gray mb-12 max-w-2xl mx-auto">
+            Every breastfeeding journey is unique. Here are some of the ways I can support you:
+          </p>
+          <div className="grid md:grid-cols-2 gap-6">
+            {services.map((service, index) => (
+              <div key={index} className="bg-linen p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                <span className="text-4xl mb-4 block">{service.icon}</span>
+                <h4 className="text-xl font-heading text-charcoal mb-2">{service.title}</h4>
+                <p className="text-warm-gray">{service.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="py-16 px-4 bg-linen">
@@ -133,8 +209,8 @@ function App() {
 
       <section className="py-16 px-4 bg-olive text-cream text-center">
         <h3 className="text-3xl font-heading mb-4">Ready to Connect?</h3>
-        <p className="text-lg mb-8 opacity-90">
-          I'm here to support you on your breastfeeding journey
+        <p className="text-lg mb-8 opacity-90 max-w-xl mx-auto">
+          I'm here to support you on your breastfeeding journey. Whether you have questions or just need someone to talk to, don't hesitate to reach out.
         </p>
         <a
           href={whatsappLink}
@@ -146,9 +222,10 @@ function App() {
         </a>
       </section>
 
-      <footer className="py-8 px-4 text-center text-warm-gray">
-        <p>Esther Edri - Breastfeeding Consultant</p>
-        <p className="text-sm mt-2">© 2026 All rights reserved</p>
+      <footer className="py-8 px-4 text-center text-warm-gray bg-linen">
+        <p className="font-heading text-lg">Esther Edri</p>
+        <p className="text-sm mt-1">IBCLC Certified Breastfeeding Consultant</p>
+        <p className="text-sm mt-4">© 2026 All rights reserved</p>
       </footer>
     </div>
   )
