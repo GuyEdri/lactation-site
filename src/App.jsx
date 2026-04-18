@@ -37,7 +37,12 @@ const tips = [
   "Ask for help - you don't have to do this alone",
   "Trust your body - it's designed for this",
   "Cluster feeding is normal and temporary",
-  "Laid-back positions can make latching easier"
+  "Laid-back positions can make latching easier",
+  "Watch for hunger cues - rooting, hand-to-mouth",
+  "Night nursing is normal and helps establish supply",
+  "A good latch should feel comfortable after initial adjustment",
+  "Breast compression can help baby get more milk",
+  "Paced bottle feeding helps if supplementing"
 ]
 
 const services = [
@@ -60,6 +65,48 @@ const services = [
     title: "Pumping & Return-to-Work",
     description: "Guidance on pumping strategies and maintaining supply when returning to work",
     icon: "🍼"
+  }
+]
+
+const faqs = [
+  {
+    question: "How long should I breastfeed?",
+    answer: "The World Health Organization recommends exclusive breastfeeding for the first 6 months, with continued breastfeeding up to 2 years or beyond. Every family is different - you decide what works for you."
+  },
+  {
+    question: "What if my baby won't latch?",
+    answer: "Latching difficulties are common and often temporary. We'll work together to find the right position and technique for you and your baby. Patience and practice make all the difference."
+  },
+  {
+    question: "How do I know if my baby is getting enough milk?",
+    answer: "Look for wet diapers (6+ per day after day 4), steady weight gain after initial loss, and your baby seems satisfied after feeds. I'm happy to help you assess this."
+  },
+  {
+    question: "Can I breastfeed if I return to work?",
+    answer: "Absolutely! With proper pumping planning and workplace support, many mothers successfully continue breastfeeding after returning to work. Let's create a plan that works for you."
+  },
+  {
+    question: "What if I have pain while breastfeeding?",
+    answer: "Pain isn't normal. It often indicates a latch issue or other solvable problem. Please reach out - I can help identify the cause and find relief."
+  },
+  {
+    question: "Do I need to wean if I get sick?",
+    answer: "Most illnesses don't require weaning. In fact, continuing to breastfeed often protects your baby. Just stay hydrated, rest, and consult your healthcare provider if needed."
+  }
+]
+
+const testimonials = [
+  {
+    quote: "Esther helped me overcome my biggest challenges with patience and gentle guidance. I finally feel confident in my breastfeeding journey.",
+    name: "Sarah M."
+  },
+  {
+    quote: "The virtual sessions were a lifesaver. From the comfort of my home, I got the support I needed to establish a good latch.",
+    name: "Rachel T."
+  },
+  {
+    quote: "Gentle, evidence-based support that made all the difference. I recommend Esther to every new mom I know.",
+    name: "Dana K."
   }
 ]
 
@@ -101,9 +148,9 @@ function App() {
       <section className="py-16 px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <img 
-            src="https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=600&h=400&fit=crop" 
-            alt="Mother and baby" 
-            className="w-full h-64 md:h-80 object-cover rounded-2xl mb-8 shadow-lg"
+            src="https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&h=500&fit=crop" 
+            alt="Mother breastfeeding her baby" 
+            className="w-full h-72 md:h-96 object-cover rounded-2xl mb-8 shadow-lg"
           />
           <p className="text-peach font-semibold mb-2">IBCLC Certified Lactation Consultant</p>
           <h2 className="text-4xl md:text-5xl font-heading text-charcoal mb-4 max-w-3xl mx-auto">
@@ -123,6 +170,8 @@ function App() {
         </div>
       </section>
 
+      <div className="h-16 bg-gradient-to-b from-cream to-linen"></div>
+
       <section className="py-16 px-4 bg-linen">
         <div className="max-w-4xl mx-auto">
           <h3 className="text-3xl font-heading text-charcoal text-center mb-8">
@@ -131,22 +180,27 @@ function App() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <img 
-                src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&h=400&fit=crop" 
-                alt="Breastfeeding support" 
-                className="w-full h-64 object-cover rounded-xl shadow-md"
+                src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&h=500&fit=crop" 
+                alt="Mother breastfeeding her newborn" 
+                className="w-full h-72 object-cover rounded-xl shadow-md"
               />
             </div>
             <div className="text-warm-gray">
               <p className="mb-4">
                 I'm passionate about helping families navigate their unique breastfeeding journey with confidence and joy. With gentle, evidence-based support, I meet you where you are.
               </p>
-              <p>
+              <p className="mb-4">
                 Whether you're expecting your first baby or facing challenges with your current journey, I'm here to provide the guidance and encouragement you need.
+              </p>
+              <p>
+                As an IBCLC certified consultant, I combine professional expertise with a warm, supportive approach. Let's work together to reach your goals.
               </p>
             </div>
           </div>
         </div>
       </section>
+
+      <div className="h-16 bg-gradient-to-b from-linen to-cream"></div>
 
       <section className="py-16 px-4">
         <div className="max-w-5xl mx-auto">
@@ -202,6 +256,41 @@ function App() {
                   index === currentTipIndex ? 'bg-peach' : 'bg-sage/30'
                 }`}
               />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 px-4 bg-linen">
+        <div className="max-w-4xl mx-auto">
+          <h3 className="text-3xl font-heading text-charcoal text-center mb-4">
+            Frequently Asked Questions
+          </h3>
+          <p className="text-center text-warm-gray mb-12 max-w-2xl mx-auto">
+            Common questions I hear from families:
+          </p>
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-cream rounded-xl p-6 shadow-sm">
+                <h4 className="text-lg font-heading text-charcoal mb-2">{faq.question}</h4>
+                <p className="text-warm-gray">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h3 className="text-3xl font-heading text-charcoal text-center mb-12">
+            What Families Say
+          </h3>
+          <div className="grid md:grid-cols-3 gap-6">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="bg-linen p-8 rounded-xl shadow-sm">
+                <p className="text-warm-gray italic mb-4">"{testimonial.quote}"</p>
+                <p className="text-charcoal font-semibold">- {testimonial.name}</p>
+              </div>
             ))}
           </div>
         </div>
