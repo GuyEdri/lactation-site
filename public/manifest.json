@@ -1,0 +1,29 @@
+{
+  "name": "Esther Edri - Breastfeeding Consultant",
+  "short_name": "Esther Edri",
+  "description": "IBCLC Certified Breastfeeding Consultant - Evidence-based support for your breastfeeding journey",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF9EC",
+  "theme_color": "#E8B4A0",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "medical", "lifestyle"],
+  "lang": "en",
+  "dir": "ltr",
+  "prefer_related_applications": false
+}
