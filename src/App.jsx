@@ -111,7 +111,7 @@ function App() {
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-3xl font-heading text-charcoal mb-8">
-            Tips for Your Journey
+            Tips for Your Breastfeeding Journey
           </h3>
           <div className="bg-linen rounded-xl p-8 min-h-[120px] flex items-center justify-center">
             <p className="text-xl text-charcoal animate-fade-in">
@@ -134,7 +134,7 @@ function App() {
       <section className="py-16 px-4 bg-olive text-cream text-center">
         <h3 className="text-3xl font-heading mb-4">Ready to Connect?</h3>
         <p className="text-lg mb-8 opacity-90">
-          I'm here to support you on your lactation journey
+          I'm here to support you on your breastfeeding journey
         </p>
         <a
           href={whatsappLink}
@@ -147,7 +147,7 @@ function App() {
       </section>
 
       <footer className="py-8 px-4 text-center text-warm-gray">
-        <p>Esther Edri - Lactation Consultant</p>
+        <p>Esther Edri - Breastfeeding Consultant</p>
         <p className="text-sm mt-2">© 2026 All rights reserved</p>
       </footer>
     </div>
