@@ -3,15 +3,64 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-cream: #FFF9EC;
+  --color-linen: #F5EFE6;
+  --color-peach: #E8B4A0;
+  --color-peach-dark: #D9A18C;
+  --color-sage: #9CAE98;
+  --color-olive: #5D6B5E;
+  --color-charcoal: #4A4543;
+  --color-warm-gray: #6B6663;
+  --animation-duration: 0.5s;
+}
+
+/* Light Theme (default) */
+:root,
+[data-theme="light"] {
+  --bg-primary: #FFF9EC;
+  --bg-secondary: #F5EFE6;
+  --text-primary: #4A4543;
+  --text-secondary: #6B6663;
+  --color-cream: #FFF9EC;
+  --color-linen: #F5EFE6;
+  --color-charcoal: #4A4543;
+  --color-warm-gray: #6B6663;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #252525;
+  --text-primary: #e5e5e5;
+  --text-secondary: #a3a3a3;
+  --color-cream: #1a1a1a;
+  --color-linen: #252525;
+  --color-charcoal: #e5e5e5;
+  --color-warm-gray: #a3a3a3;
+  --color-sage: #7a9a78;
+  --color-olive: #3d453a;
+}
+
+/* High Contrast Mode */
+[data-high-contrast="true"] {
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f0f0f0;
+}
+
 body {
   font-family: 'Nunito', sans-serif;
-  background-color: #FFF9EC;
-  color: #4A4543;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   margin: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lora', serif;
+  color: var(--text-primary);
 }
 
 @keyframes fadeIn {
@@ -20,7 +69,40 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.5s ease-out;
+  animation: fadeIn var(--animation-duration) ease-out;
+}
+
+/* Theme-aware classes */
+.bg-cream {
+  background-color: var(--bg-primary);
+}
+
+.bg-linen {
+  background-color: var(--bg-secondary);
+}
+
+.bg-dark-cream {
+  background-color: var(--bg-primary);
+}
+
+.bg-dark-linen {
+  background-color: var(--bg-secondary);
+}
+
+.text-charcoal {
+  color: var(--text-primary);
+}
+
+.text-dark-charcoal {
+  color: var(--text-primary);
+}
+
+.text-warm-gray {
+  color: var(--text-secondary);
+}
+
+.text-dark-warm-gray {
+  color: var(--text-secondary);
 }
 
 /* Accessibility: Skip Link */
@@ -75,43 +157,7 @@ button:focus-visible {
   }
 }
 
-/* 2026 Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1a1a1a;
-    color: #e5e5e5;
-  }
-  
-  .bg-cream {
-    background-color: #1a1a1a;
-  }
-  
-  .bg-linen {
-    background-color: #252525;
-  }
-  
-  .text-charcoal {
-    color: #e5e5e5;
-  }
-  
-  .text-warm-gray {
-    color: #a3a3a3;
-  }
-  
-  .text-sage {
-    color: #7a9a78;
-  }
-  
-  .bg-olive {
-    background-color: #3d453a;
-  }
-  
-  .text-cream {
-    color: #f5f5f5;
-  }
-}
-
-/* Container Queries for component-level responsiveness */
+/* Container Queries */
 @supports (container-type: inline-size) {
   .card-container {
     container-type: inline-size;
@@ -125,39 +171,27 @@ button:focus-visible {
   }
 }
 
-/* Modern CSS: has() selector for parent-based styling */
+/* Modern CSS: has() selector */
 @supports selector(:has(.child)) {
   .card:has(.highlight) {
     border-color: #E8B4A0;
   }
 }
 
-/* Touch targets - minimum 48px for mobile */
+/* Touch targets */
 @media (pointer: coarse) {
-  button, 
-  a,
-  input,
-  select,
-  textarea {
+  button, a, input, select, textarea {
     min-height: 48px;
     min-width: 48px;
   }
 }
 
-/* Fluid typography using clamp */
-h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-}
+/* Fluid typography */
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+h3 { font-size: clamp(1.25rem, 3vw, 2rem); }
 
-h2 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-}
-
-h3 {
-  font-size: clamp(1.25rem, 3vw, 2rem);
-}
-
-/* Dynamic viewport units for mobile */
+/* Dynamic viewport */
 .hero {
   min-height: 100dvh;
   min-height: 100svh;
@@ -165,12 +199,22 @@ h3 {
 
 /* Print styles */
 @media print {
-  .no-print {
-    display: none !important;
+  .no-print { display: none !important; }
+  body { background: white; color: black; }
+}
+
+/* Accessibility menu animation */
+[role="menu"] {
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  body {
-    background: white;
-    color: black;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

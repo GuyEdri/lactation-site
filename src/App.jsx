@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const translations = {
   en: {
@@ -27,7 +27,17 @@ const translations = {
     lang: "עברית",
     skipLink: "Skip to main content",
     langToggleLabel: "Switch to Hebrew",
-    whatsappAriaLabel: "Contact via WhatsApp"
+    whatsappAriaLabel: "Contact via WhatsApp",
+    themeLight: "Light mode",
+    themeDark: "Dark mode",
+    accessibilityMenu: "Accessibility options",
+    fontSizeNormal: "Normal",
+    fontSizeLarge: "Large",
+    fontSizeXLarge: "Extra Large",
+    highContrast: "High contrast",
+    reduceMotion: "Reduce motion",
+    resetA11y: "Reset to default",
+    close: "Close"
   },
   he: {
     name: "אסתר אדרי",
@@ -55,7 +65,17 @@ const translations = {
     lang: "English",
     skipLink: "דלג לתוכן הראשי",
     langToggleLabel: "החלף לאנגלית",
-    whatsappAriaLabel: "צרי קשר בוואטסאפ"
+    whatsappAriaLabel: "צרי קשר בוואטסאפ",
+    themeLight: "מצב בהיר",
+    themeDark: "מצב כהה",
+    accessibilityMenu: "אפשרויות נגישות",
+    fontSizeNormal: "רגיל",
+    fontSizeLarge: "גדול",
+    fontSizeXLarge: "גדול מאוד",
+    highContrast: "ניגודיות גבוהה",
+    reduceMotion: "הפחתת תנועה",
+    resetA11y: "איפוס לברירת מחדל",
+    close: "סגור"
   }
 }
 
@@ -173,10 +193,44 @@ const shuffleArray = (array) => {
 
 function App() {
   const [lang, setLang] = useState('en')
+  const [theme, setTheme] = useState('light')
+  const [showA11yMenu, setShowA11yMenu] = useState(false)
+  const [a11ySettings, setA11ySettings] = useState({
+    fontSize: 'normal',
+    highContrast: false,
+    reduceMotion: false
+  })
   const [displayedMyths, setDisplayedMyths] = useState([])
   const [displayedTips, setDisplayedTips] = useState([])
   const [currentTipIndex, setCurrentTipIndex] = useState(0)
   const t = translations[lang]
+  const menuRef = useRef(null)
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme) {
+      setTheme(savedTheme)
+      document.documentElement.setAttribute('data-theme', savedTheme)
+    }
+    
+    const savedA11y = localStorage.getItem('a11ySettings')
+    if (savedA11y) {
+      const parsed = JSON.parse(savedA11y)
+      setA11ySettings(parsed)
+      applyA11ySettings(parsed)
+    }
+  }, [])
+
+  const applyA11ySettings = (settings) => {
+    const root = document.documentElement
+    root.style.fontSize = settings.fontSize === 'large' ? '112%' : settings.fontSize === 'x-large' ? '120%' : '100%'
+    root.setAttribute('data-high-contrast', settings.highContrast)
+    if (settings.reduceMotion) {
+      root.style.setProperty('--animation-duration', '0.01ms')
+    } else {
+      root.style.setProperty('--animation-duration', '0.5s')
+    }
+  }
 
   useEffect(() => {
     setDisplayedMyths(shuffleArray(myths[lang]))
@@ -187,28 +241,144 @@ function App() {
     if (displayedTips.length === 0) return
     const interval = setInterval(() => {
       setCurrentTipIndex((prev) => (prev + 1) % displayedTips.length)
-    }, 4000)
+    }, a11ySettings.reduceMotion ? 0 : 4000)
     return () => clearInterval(interval)
-  }, [displayedTips.length])
+  }, [displayedTips.length, a11ySettings.reduceMotion])
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setShowA11yMenu(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+    localStorage.setItem('theme', newTheme)
+    document.documentElement.setAttribute('data-theme', newTheme)
+  }
+
+  const updateA11ySetting = (key, value) => {
+    const newSettings = { ...a11ySettings, [key]: value }
+    setA11ySettings(newSettings)
+    localStorage.setItem('a11ySettings', JSON.stringify(newSettings))
+    applyA11ySettings(newSettings)
+  }
+
+  const resetA11y = () => {
+    const defaultSettings = { fontSize: 'normal', highContrast: false, reduceMotion: false }
+    setA11ySettings(defaultSettings)
+    localStorage.setItem('a11ySettings', JSON.stringify(defaultSettings))
+    applyA11ySettings(defaultSettings)
+  }
 
   const whatsappLink = `https://wa.me/972549171033`
   const isRTL = lang === 'he'
 
+  const bgClass = theme === 'dark' ? 'bg-dark-cream' : 'bg-cream'
+  const sectionBgClass = theme === 'dark' ? 'bg-dark-linen' : 'bg-linen'
+
   return (
-    <div className="min-h-screen bg-cream" dir={isRTL ? 'rtl' : 'ltr'} lang={lang}>
+    <div 
+      className={`min-h-screen ${bgClass} ${a11ySettings.highContrast ? 'high-contrast' : ''}`} 
+      dir={isRTL ? 'rtl' : 'ltr'} 
+      lang={lang}
+      style={a11ySettings.reduceMotion ? { '--animation-duration': '0.01ms' } : {}}
+    >
       <a href="#main-content" className="skip-link">
         {t.skipLink}
       </a>
 
-      <header className="py-6 px-4 flex justify-between items-center max-w-6xl mx-auto" role="banner">
-        <h1 className="text-2xl font-heading text-charcoal">{t.name}</h1>
-        <button
-          onClick={() => setLang(lang === 'en' ? 'he' : 'en')}
-          className="bg-linen text-charcoal px-4 py-2 rounded-full font-semibold hover:bg-peach hover:text-white transition-colors"
-          aria-label={t.langToggleLabel}
-        >
-          {t.lang}
-        </button>
+      <header className="py-4 px-4 flex justify-between items-center max-w-6xl mx-auto" role="banner">
+        <h1 className={`text-2xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'}`}>{t.name}</h1>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={toggleTheme}
+            className="p-3 rounded-full bg-linen hover:bg-peach transition-colors"
+            aria-label={theme === 'light' ? t.themeDark : t.themeLight}
+            title={theme === 'light' ? t.themeDark : t.themeLight}
+          >
+            {theme === 'light' ? '🌙' : '☀️'}
+          </button>
+          <button
+            onClick={() => setLang(lang === 'en' ? 'he' : 'en')}
+            className="bg-linen text-charcoal px-4 py-2 rounded-full font-semibold hover:bg-peach hover:text-white transition-colors"
+            aria-label={t.langToggleLabel}
+          >
+            {t.lang}
+          </button>
+          <div className="relative" ref={menuRef}>
+            <button
+              onClick={() => setShowA11yMenu(!showA11yMenu)}
+              className="p-3 rounded-full bg-linen hover:bg-peach transition-colors"
+              aria-label={t.accessibilityMenu}
+              aria-expanded={showA11yMenu}
+              aria-haspopup="true"
+            >
+              ♿
+            </button>
+            {showA11yMenu && (
+              <div className="absolute right-0 mt-2 w-64 bg-cream rounded-xl shadow-lg p-4 z-50 border border-linen" role="menu">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="font-heading text-charcoal">{t.accessibilityMenu}</h3>
+                  <button onClick={() => setShowA11yMenu(false)} className="text-warm-gray hover:text-charcoal" aria-label={t.close}>✕</button>
+                </div>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm text-warm-gray mb-2">Font Size</label>
+                    <div className="flex gap-2">
+                      {['normal', 'large', 'x-large'].map((size) => (
+                        <button
+                          key={size}
+                          onClick={() => updateA11ySetting('fontSize', size)}
+                          className={`px-3 py-2 rounded-lg text-sm ${a11ySettings.fontSize === size ? 'bg-peach text-white' : 'bg-linen text-charcoal'}`}
+                        >
+                          {size === 'normal' ? t.fontSizeNormal : size === 'large' ? t.fontSizeLarge : t.fontSizeXLarge}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <label className="text-charcoal">{t.highContrast}</label>
+                    <button
+                      onClick={() => updateA11ySetting('highContrast', !a11ySettings.highContrast)}
+                      className={`w-12 h-6 rounded-full transition-colors ${a11ySettings.highContrast ? 'bg-peach' : 'bg-sage'}`}
+                      role="switch"
+                      aria-checked={a11ySettings.highContrast}
+                    >
+                      <span className={`block w-5 h-5 bg-white rounded-full shadow transform transition-transform ${a11ySettings.highContrast ? 'translate-x-6' : 'translate-x-0.5'}`} />
+                    </button>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <label className="text-charcoal">{t.reduceMotion}</label>
+                    <button
+                      onClick={() => updateA11ySetting('reduceMotion', !a11ySettings.reduceMotion)}
+                      className={`w-12 h-6 rounded-full transition-colors ${a11ySettings.reduceMotion ? 'bg-peach' : 'bg-sage'}`}
+                      role="switch"
+                      aria-checked={a11ySettings.reduceMotion}
+                    >
+                      <span className={`block w-5 h-5 bg-white rounded-full shadow transform transition-transform ${a11ySettings.reduceMotion ? 'translate-x-6' : 'translate-x-0.5'}`} />
+                    </button>
+                  </div>
+                  
+                  <button
+                    onClick={resetA11y}
+                    className="w-full py-2 bg-linen text-charcoal rounded-lg hover:bg-peach hover:text-white transition-colors"
+                  >
+                    {t.resetA11y}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </header>
 
       <main id="main-content">
@@ -220,10 +390,10 @@ function App() {
               className="w-full h-72 md:h-96 object-cover rounded-2xl mb-8 shadow-lg"
             />
             <p className="text-peach font-semibold mb-2">{t.title}</p>
-            <h2 id="hero-title" className="text-4xl md:text-5xl font-heading text-charcoal mb-4 max-w-3xl mx-auto">
+            <h2 id="hero-title" className={`text-4xl md:text-5xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} mb-4 max-w-3xl mx-auto`}>
               {t.heroTitle}
             </h2>
-            <p className="text-xl text-warm-gray mb-8 max-w-2xl mx-auto">
+            <p className={`text-xl ${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} mb-8 max-w-2xl mx-auto`}>
               {t.heroSubtitle}
             </p>
             <a
@@ -240,20 +410,20 @@ function App() {
 
         <div className="h-16 bg-gradient-to-b from-cream to-linen" aria-hidden="true"></div>
 
-        <section className="py-16 px-4 bg-linen" aria-labelledby="about-title">
+        <section className={`py-16 px-4 ${sectionBgClass}`} aria-labelledby="about-title">
           <div className="max-w-4xl mx-auto">
-            <h3 id="about-title" className="text-3xl font-heading text-charcoal text-center mb-8">
+            <h3 id="about-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-8`}>
               {t.aboutTitle}
             </h3>
             <div className={`grid md:grid-cols-2 gap-8 items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
               <div>
                 <img 
                   src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&h=500&fit=crop" 
-                  alt="Mother peacefully breastfeeding her newborn in a cozy home setting, showing skin-to-skin contact" 
+                  alt="Mother peacefully breastfeeding her newborn in a cozy home setting" 
                   className="w-full h-72 object-cover rounded-xl shadow-md"
                 />
               </div>
-              <div className="text-warm-gray">
+              <div className={theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'}>
                 <p className="mb-4">{t.aboutText1}</p>
                 <p className="mb-4">{t.aboutText2}</p>
                 <p>{t.aboutText3}</p>
@@ -266,27 +436,27 @@ function App() {
 
         <section className="py-16 px-4" aria-labelledby="services-title">
           <div className="max-w-5xl mx-auto">
-            <h3 id="services-title" className="text-3xl font-heading text-charcoal text-center mb-4">
+            <h3 id="services-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-4`}>
               {t.servicesTitle}
             </h3>
-            <p className="text-center text-warm-gray mb-12 max-w-2xl mx-auto">
+            <p className={`text-center ${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} mb-12 max-w-2xl mx-auto`}>
               {t.servicesSubtitle}
             </p>
             <div className="grid md:grid-cols-2 gap-6" role="list">
               {services[lang].map((service, index) => (
                 <div key={index} className="bg-linen p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow" role="listitem">
                   <span className="text-4xl mb-4 block" aria-hidden="true">{service.icon}</span>
-                  <h4 className="text-xl font-heading text-charcoal mb-2">{service.title}</h4>
-                  <p className="text-warm-gray">{service.description}</p>
+                  <h4 className={`text-xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} mb-2`}>{service.title}</h4>
+                  <p className={theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'}>{service.description}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="py-16 px-4 bg-linen" aria-labelledby="myths-title">
+        <section className={`py-16 px-4 ${sectionBgClass}`} aria-labelledby="myths-title">
           <div className="max-w-4xl mx-auto">
-            <h3 id="myths-title" className="text-3xl font-heading text-charcoal text-center mb-12">
+            <h3 id="myths-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-12`}>
               {t.mythsTitle}
             </h3>
             <div className="grid md:grid-cols-2 gap-6" role="list">
@@ -302,11 +472,11 @@ function App() {
 
         <section className="py-16 px-4" aria-labelledby="tips-title">
           <div className="max-w-4xl mx-auto text-center">
-            <h3 id="tips-title" className="text-3xl font-heading text-charcoal mb-8">
+            <h3 id="tips-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} mb-8`}>
               {t.tipsTitle}
             </h3>
             <div className="bg-linen rounded-xl p-8 min-h-[120px] flex items-center justify-center" role="status" aria-live="polite" aria-atomic="true">
-              <p className="text-xl text-charcoal animate-fade-in">
+              <p className={`text-xl ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} animate-fade-in`}>
                 {displayedTips[currentTipIndex]}
               </p>
             </div>
@@ -326,19 +496,19 @@ function App() {
           </div>
         </section>
 
-        <section className="py-16 px-4 bg-linen" aria-labelledby="faq-title">
+        <section className={`py-16 px-4 ${sectionBgClass}`} aria-labelledby="faq-title">
           <div className="max-w-4xl mx-auto">
-            <h3 id="faq-title" className="text-3xl font-heading text-charcoal text-center mb-4">
+            <h3 id="faq-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-4`}>
               {t.faqTitle}
             </h3>
-            <p className="text-center text-warm-gray mb-12 max-w-2xl mx-auto">
+            <p className={`text-center ${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} mb-12 max-w-2xl mx-auto`}>
               {t.faqSubtitle}
             </p>
             <dl className="space-y-4">
               {faqs[lang].map((faq, index) => (
                 <div key={index} className="bg-cream rounded-xl p-6 shadow-sm">
-                  <dt className="text-lg font-heading text-charcoal mb-2">{faq.question}</dt>
-                  <dd className="text-warm-gray">{faq.answer}</dd>
+                  <dt className={`text-lg font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} mb-2`}>{faq.question}</dt>
+                  <dd className={theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'}>{faq.answer}</dd>
                 </div>
               ))}
             </dl>
@@ -347,14 +517,14 @@ function App() {
 
         <section className="py-16 px-4" aria-labelledby="testimonials-title">
           <div className="max-w-4xl mx-auto">
-            <h3 id="testimonials-title" className="text-3xl font-heading text-charcoal text-center mb-12">
+            <h3 id="testimonials-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-12`}>
               {t.testimonialsTitle}
             </h3>
             <div className="grid md:grid-cols-3 gap-6" role="list">
               {testimonials[lang].map((testimonial, index) => (
                 <blockquote key={index} className="bg-linen p-8 rounded-xl shadow-sm" role="listitem">
-                  <p className="text-warm-gray italic mb-4">"{testimonial.quote}"</p>
-                  <cite className="text-charcoal font-semibold not-italic">- {testimonial.name}</cite>
+                  <p className={`${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} italic mb-4`}>"{testimonial.quote}"</p>
+                  <cite className={`${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} font-semibold not-italic`}>- {testimonial.name}</cite>
                 </blockquote>
               ))}
             </div>
@@ -378,7 +548,7 @@ function App() {
         </section>
       </main>
 
-      <footer className="py-8 px-4 text-center text-warm-gray bg-linen" role="contentinfo">
+      <footer className={`py-8 px-4 text-center ${theme === 'dark' ? 'text-dark-warm-gray bg-dark-linen' : 'text-warm-gray bg-linen'}`} role="contentinfo">
         <p className="font-heading text-lg">{t.footerTitle}</p>
         <p className="text-sm mt-1">{t.footerSubtitle}</p>
         <p className="text-sm mt-4">{t.rights}</p>
