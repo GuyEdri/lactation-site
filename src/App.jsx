@@ -18,6 +18,21 @@ const translations = {
     faqTitle: "Frequently Asked Questions",
     faqSubtitle: "Common questions I hear from families:",
     testimonialsTitle: "What Families Say",
+    blogTitle: "Blog",
+    blogSubtitle: "Tips, guides, and insights for your breastfeeding journey",
+    blogComingSoon: "More articles coming soon!",
+    bookingTitle: "Book a Consultation",
+    bookingSubtitle: "Choose a service and let's find a time that works for you",
+    selectService: "Select a service",
+    yourName: "Your Name",
+    yourPhone: "Your Phone Number",
+    preferredTime: "Preferred time",
+    morning: "Morning (9AM-12PM)",
+    afternoon: "Afternoon (12PM-5PM)",
+    evening: "Evening (5PM-8PM)",
+    anyTime: "Any time",
+    additionalNotes: "Additional notes (optional)",
+    bookViaWhatsapp: "Book via WhatsApp",
     contactTitle: "Ready to Connect?",
     contactText: "I'm here to support you on your breastfeeding journey. Whether you have questions or just need someone to talk to, don't hesitate to reach out.",
     contactCta: "Message Me on WhatsApp",
@@ -56,6 +71,21 @@ const translations = {
     faqTitle: "שאלות נפוצות",
     faqSubtitle: "שאלות נפוצות שאני שומעת ממשפחות:",
     testimonialsTitle: "מה המשפחות אומרות",
+    blogTitle: "בלוג",
+    blogSubtitle: "טיפים, מדריכים ותובנות למסע ההנקה שלך",
+    blogComingSoon: "מאמרים נוספים בקרוב!",
+    bookingTitle: "קביעת ייעוץ",
+    bookingSubtitle: "בחרו שירות ונמצא זמן שמתאים לכן",
+    selectService: "בחרו שירות",
+    yourName: "השם שלך",
+    yourPhone: "מספר הטלפון",
+    preferredTime: "הזמן המועדף",
+    morning: "בוקר (9:00-12:00)",
+    afternoon: "צהריים (12:00-17:00)",
+    evening: "ערב (17:00-20:00)",
+    anyTime: "כל זמן",
+    additionalNotes: "הערות נוספות (אופציונלי)",
+    bookViaWhatsapp: "קבעו דרך וואטסאפ",
     contactTitle: "מוכנים להתחבר?",
     contactText: "אני כאן לתמוך בך במסע ההנקה שלך. בין אם יש לך שאלות או שאת פשוט צריכה מישהו לדבר איתו, אל תהססי לפנות.",
     contactCta: "שלחי לי הודעה בוואטסאפ",
@@ -171,14 +201,33 @@ const faqs = {
 
 const testimonials = {
   en: [
-    { quote: "Esther helped me overcome my biggest challenges with patience and gentle guidance. I finally feel confident in my breastfeeding journey.", name: "Sarah M." },
-    { quote: "The virtual sessions were a lifesaver. From the comfort of my home, I got the support I needed to establish a good latch.", name: "Rachel T." },
-    { quote: "Gentle, evidence-based support that made all the difference. I recommend Esther to every new mom I know.", name: "Dana K." }
+    { name: "Sarah M.", photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face", quote: "Esther helped me overcome my biggest challenges with patience and gentle guidance. I finally feel confident in my breastfeeding journey.", babyAge: "First-time mom, baby 3 months" },
+    { name: "Rachel T.", photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face", quote: "The virtual sessions were a lifesaver. From the comfort of my home, I got the support I needed to establish a good latch.", babyAge: "Baby 6 weeks" },
+    { name: "Dana K.", photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face", quote: "Gentle, evidence-based support that made all the difference. I recommend Esther to every new mom I know.", babyAge: "Mom of two, baby 4 months" },
+    { name: "Your Name", photo: "https://images.unsplash.com/photo-1487412720507-e7ab37617c45?w=200&h=200&fit=crop&crop=face", quote: "Your testimonial could be here! Share your experience with others.", babyAge: "Your baby's age" }
   ],
   he: [
-    { quote: "אסתר עזרה לי להתגבר על האתגרים הגדולים שלי בסבלנות והכוונה עדינה. לבסוף אני מרגישה ביטחון במסע ההנקה שלי.", name: "שרה מ." },
-    { quote: "הפגישות בוידאו היו מ спаса חיים. מהנוחיות של הבית שלי קיבלתי את התמיכה שהייתי צריכה כדי לבסס יניקה טובה.", name: "רחל ת." },
-    { quote: "תמיכה עדינה ומבוססת ראיות שעשתה את כל ההבדל. אני ממליצה על אסתר לכל אמא חדשה שאני מכירה.", name: "דנה ק." }
+    { name: "שרה מ.", photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face", quote: "אסתר עזרה לי להתגבר על האתגרים הגדולים שלי בסבלנות והכוונה עדינה. לבסוף אני מרגישה ביטחון במסע ההנקה שלי.", babyAge: "אמא לראשונה, תינוקת 3 חודשים" },
+    { name: "רחל ת.", photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face", quote: "הפגישות בוידאו היו מ спаса חיים. מהנוחיות של הבית שלי קיבלתי את התמיכה שהייתי צריכה כדי לבסס יניקה טובה.", babyAge: "תינוקת 6 שבועות" },
+    { name: "דנה ק.", photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face", quote: "תמיכה עדינה ומבוססת ראיות שעשתה את כל ההבדל. אני ממליצה על אסתר לכל אמא חדשה שאני מכירה.", babyAge: "אמא לשניים, תינוקת 4 חודשים" },
+    { name: "השם שלך", photo: "https://images.unsplash.com/photo-1487412720507-e7ab37617c45?w=200&h=200&fit=crop&crop=face", quote: "ההמלצה שלך יכולה להיות כאן! שתפי את החוויה שלך עם אחרים.", babyAge: "גיל התינוק שלך" }
+  ]
+}
+
+const blogPosts = {
+  en: [
+    { title: "Getting Started with Breastfeeding", excerpt: "Everything you need to know to begin your breastfeeding journey with confidence.", category: "Basics", readTime: "5 min" },
+    { title: "Latch 101: How to Get a Good Latch", excerpt: "The foundation of successful breastfeeding starts with a good latch.", category: "Basics", readTime: "7 min" },
+    { title: "Understanding Baby's Hunger Cues", excerpt: "Learn to recognize when your baby is ready to eat.", category: "Basics", readTime: "4 min" },
+    { title: "Common Breastfeeding Challenges", excerpt: "Navigating the hurdles every new breastfeeding parent faces.", category: "Challenges", readTime: "8 min" },
+    { title: "Pumping 101: Building Your Stash", excerpt: "Tips for effective pumping and building a milk supply.", category: "Pumping", readTime: "6 min" }
+  ],
+  he: [
+    { title: "התחלת ההנקה", excerpt: "כל מה שאת צריכה לדעת כדי להתחיל את מסע ההנקה שלך בביטחון.", category: "בסיס", readTime: "5 דקות" },
+    { title: "יניקה נכונה", excerpt: "הבסיס להנקה מוצלחת מתחיל ביניקה נכונה.", category: "בסיס", readTime: "7 דקות" },
+    { title: "סימני רעב אצל התינוק", excerpt: "למדי לזהות מתי התינוק שלך מוכן לאכול.", category: "בסיס", readTime: "4 דקות" },
+    { title: "אתגרים נפוצים בהנקה", excerpt: "התמודדות עם המכשולות שכל הורה חדש מתמודד איתם.", category: "אתגרים", readTime: "8 דקות" },
+    { title: "חליבה 101", excerpt: "טיפים לחליבה יעילה ובניית מאגר חלב.", category: "חליבה", readTime: "6 דקות" }
   ]
 }
 
@@ -203,6 +252,7 @@ function App() {
   const [displayedMyths, setDisplayedMyths] = useState([])
   const [displayedTips, setDisplayedTips] = useState([])
   const [currentTipIndex, setCurrentTipIndex] = useState(0)
+  const [bookingForm, setBookingForm] = useState({ name: '', phone: '', service: '', time: '', notes: '' })
   const t = translations[lang]
   const menuRef = useRef(null)
 
@@ -276,9 +326,21 @@ function App() {
     applyA11ySettings(defaultSettings)
   }
 
+  const handleBooking = (e) => {
+    e.preventDefault()
+    const serviceNames = { en: { initial: "Initial Consultation", followup: "Follow-up Session", prenatal: "Prenatal Preparation", pumping: "Pumping Consultation" }, he: { initial: "ייעוץ ראשוני", followup: "מפגש מעקב", prenatal: "הכנה להנקה", pumping: "ייעוץ חליבה" }}
+    const timeLabels = { en: { morning: "Morning", afternoon: "Afternoon", evening: "Evening", any: "Any time" }, he: { morning: "בוקר", afternoon: "צהריים", evening: "ערב", any: "כל זמן" }}
+    
+    const message = lang === 'en' 
+      ? `Hi Esther! I'd like to book a consultation.\n\nName: ${bookingForm.name}\nPhone: ${bookingForm.phone}\nService: ${serviceNames.en[bookingForm.service]}\nPreferred Time: ${timeLabels.en[bookingForm.time]}\nNotes: ${bookingForm.notes || 'None'}`
+      : `היי אסתר! אני רוצה לקבוע ייעוץ.\n\nשם: ${bookingForm.name}\nטלפון: ${bookingForm.phone}\nשירות: ${serviceNames.he[bookingForm.service]}\nזמן מועדף: ${timeLabels.he[bookingForm.time]}\nהערות: ${bookingForm.notes || 'אין'}`
+    
+    window.open(`https://wa.me/972549171033?text=${encodeURIComponent(message)}`)
+    setBookingForm({ name: '', phone: '', service: '', time: '', notes: '' })
+  }
+
   const whatsappLink = `https://wa.me/972549171033`
   const isRTL = lang === 'he'
-
   const bgClass = theme === 'dark' ? 'bg-dark-cream' : 'bg-cream'
   const sectionBgClass = theme === 'dark' ? 'bg-dark-linen' : 'bg-linen'
 
@@ -289,91 +351,51 @@ function App() {
       lang={lang}
       style={a11ySettings.reduceMotion ? { '--animation-duration': '0.01ms' } : {}}
     >
-      <a href="#main-content" className="skip-link">
-        {t.skipLink}
-      </a>
+      <a href="#main-content" className="skip-link">{t.skipLink}</a>
 
       <header className="py-4 px-4 flex justify-between items-center max-w-6xl mx-auto" role="banner">
         <h1 className={`text-2xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'}`}>{t.name}</h1>
         <div className="flex items-center gap-3">
-          <button
-            onClick={toggleTheme}
-            className="p-3 rounded-full bg-linen hover:bg-peach transition-colors"
-            aria-label={theme === 'light' ? t.themeDark : t.themeLight}
-            title={theme === 'light' ? t.themeDark : t.themeLight}
-          >
+          <button onClick={toggleTheme} className="p-3 rounded-full bg-linen hover:bg-peach transition-colors" aria-label={theme === 'light' ? t.themeDark : t.themeLight}>
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
-          <button
-            onClick={() => setLang(lang === 'en' ? 'he' : 'en')}
-            className="bg-linen text-charcoal px-4 py-2 rounded-full font-semibold hover:bg-peach hover:text-white transition-colors"
-            aria-label={t.langToggleLabel}
-          >
+          <button onClick={() => setLang(lang === 'en' ? 'he' : 'en')} className="bg-linen text-charcoal px-4 py-2 rounded-full font-semibold hover:bg-peach hover:text-white transition-colors" aria-label={t.langToggleLabel}>
             {t.lang}
           </button>
           <div className="relative" ref={menuRef}>
-            <button
-              onClick={() => setShowA11yMenu(!showA11yMenu)}
-              className="p-3 rounded-full bg-linen hover:bg-peach transition-colors"
-              aria-label={t.accessibilityMenu}
-              aria-expanded={showA11yMenu}
-              aria-haspopup="true"
-            >
+            <button onClick={() => setShowA11yMenu(!showA11yMenu)} className="p-3 rounded-full bg-linen hover:bg-peach transition-colors" aria-label={t.accessibilityMenu} aria-expanded={showA11yMenu}>
               ♿
             </button>
             {showA11yMenu && (
               <div className="absolute right-0 mt-2 w-64 bg-cream rounded-xl shadow-lg p-4 z-50 border border-linen" role="menu">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="font-heading text-charcoal">{t.accessibilityMenu}</h3>
-                  <button onClick={() => setShowA11yMenu(false)} className="text-warm-gray hover:text-charcoal" aria-label={t.close}>✕</button>
+                  <button onClick={() => setShowA11yMenu(false)} className="text-warm-gray hover:text-charcoal">✕</button>
                 </div>
-                
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm text-warm-gray mb-2">Font Size</label>
                     <div className="flex gap-2">
                       {['normal', 'large', 'x-large'].map((size) => (
-                        <button
-                          key={size}
-                          onClick={() => updateA11ySetting('fontSize', size)}
-                          className={`px-3 py-2 rounded-lg text-sm ${a11ySettings.fontSize === size ? 'bg-peach text-white' : 'bg-linen text-charcoal'}`}
-                        >
+                        <button key={size} onClick={() => updateA11ySetting('fontSize', size)} className={`px-3 py-2 rounded-lg text-sm ${a11ySettings.fontSize === size ? 'bg-peach text-white' : 'bg-linen text-charcoal'}`}>
                           {size === 'normal' ? t.fontSizeNormal : size === 'large' ? t.fontSizeLarge : t.fontSizeXLarge}
                         </button>
                       ))}
                     </div>
                   </div>
-                  
                   <div className="flex items-center justify-between">
                     <label className="text-charcoal">{t.highContrast}</label>
-                    <button
-                      onClick={() => updateA11ySetting('highContrast', !a11ySettings.highContrast)}
-                      className={`w-12 h-6 rounded-full transition-colors ${a11ySettings.highContrast ? 'bg-peach' : 'bg-sage'}`}
-                      role="switch"
-                      aria-checked={a11ySettings.highContrast}
-                    >
+                    <button onClick={() => updateA11ySetting('highContrast', !a11ySettings.highContrast)} className={`w-12 h-6 rounded-full transition-colors ${a11ySettings.highContrast ? 'bg-peach' : 'bg-sage'}`} role="switch" aria-checked={a11ySettings.highContrast}>
                       <span className={`block w-5 h-5 bg-white rounded-full shadow transform transition-transform ${a11ySettings.highContrast ? 'translate-x-6' : 'translate-x-0.5'}`} />
                     </button>
                   </div>
-                  
                   <div className="flex items-center justify-between">
                     <label className="text-charcoal">{t.reduceMotion}</label>
-                    <button
-                      onClick={() => updateA11ySetting('reduceMotion', !a11ySettings.reduceMotion)}
-                      className={`w-12 h-6 rounded-full transition-colors ${a11ySettings.reduceMotion ? 'bg-peach' : 'bg-sage'}`}
-                      role="switch"
-                      aria-checked={a11ySettings.reduceMotion}
-                    >
+                    <button onClick={() => updateA11ySetting('reduceMotion', !a11ySettings.reduceMotion)} className={`w-12 h-6 rounded-full transition-colors ${a11ySettings.reduceMotion ? 'bg-peach' : 'bg-sage'}`} role="switch" aria-checked={a11ySettings.reduceMotion}>
                       <span className={`block w-5 h-5 bg-white rounded-full shadow transform transition-transform ${a11ySettings.reduceMotion ? 'translate-x-6' : 'translate-x-0.5'}`} />
                     </button>
                   </div>
-                  
-                  <button
-                    onClick={resetA11y}
-                    className="w-full py-2 bg-linen text-charcoal rounded-lg hover:bg-peach hover:text-white transition-colors"
-                  >
-                    {t.resetA11y}
-                  </button>
+                  <button onClick={resetA11y} className="w-full py-2 bg-linen text-charcoal rounded-lg hover:bg-peach hover:text-white transition-colors">{t.resetA11y}</button>
                 </div>
               </div>
             )}
@@ -384,27 +406,11 @@ function App() {
       <main id="main-content">
         <section className="py-16 px-4 text-center" aria-labelledby="hero-title">
           <div className="max-w-4xl mx-auto">
-            <img 
-              src="https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&h=500&fit=crop" 
-              alt="Mother holding and breastfeeding her smiling baby in a warm, natural light setting" 
-              className="w-full h-72 md:h-96 object-cover rounded-2xl mb-8 shadow-lg"
-            />
+            <img src="https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&h=500&fit=crop" alt="Mother breastfeeding her baby" className="w-full h-72 md:h-96 object-cover rounded-2xl mb-8 shadow-lg" />
             <p className="text-peach font-semibold mb-2">{t.title}</p>
-            <h2 id="hero-title" className={`text-4xl md:text-5xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} mb-4 max-w-3xl mx-auto`}>
-              {t.heroTitle}
-            </h2>
-            <p className={`text-xl ${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} mb-8 max-w-2xl mx-auto`}>
-              {t.heroSubtitle}
-            </p>
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-peach hover:bg-peach-dark text-white font-semibold py-4 px-8 rounded-full transition-colors duration-300"
-              aria-label={t.whatsappAriaLabel}
-            >
-              {t.cta}
-            </a>
+            <h2 id="hero-title" className={`text-4xl md:text-5xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} mb-4 max-w-3xl mx-auto`}>{t.heroTitle}</h2>
+            <p className={`text-xl ${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} mb-8 max-w-2xl mx-auto`}>{t.heroSubtitle}</p>
+            <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-block bg-peach hover:bg-peach-dark text-white font-semibold py-4 px-8 rounded-full transition-colors duration-300" aria-label={t.whatsappAriaLabel}>{t.cta}</a>
           </div>
         </section>
 
@@ -412,16 +418,10 @@ function App() {
 
         <section className={`py-16 px-4 ${sectionBgClass}`} aria-labelledby="about-title">
           <div className="max-w-4xl mx-auto">
-            <h3 id="about-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-8`}>
-              {t.aboutTitle}
-            </h3>
+            <h3 id="about-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-8`}>{t.aboutTitle}</h3>
             <div className={`grid md:grid-cols-2 gap-8 items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
               <div>
-                <img 
-                  src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&h=500&fit=crop" 
-                  alt="Mother peacefully breastfeeding her newborn in a cozy home setting" 
-                  className="w-full h-72 object-cover rounded-xl shadow-md"
-                />
+                <img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&h=500&fit=crop" alt="Mother breastfeeding newborn" className="w-full h-72 object-cover rounded-xl shadow-md" />
               </div>
               <div className={theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'}>
                 <p className="mb-4">{t.aboutText1}</p>
@@ -436,12 +436,8 @@ function App() {
 
         <section className="py-16 px-4" aria-labelledby="services-title">
           <div className="max-w-5xl mx-auto">
-            <h3 id="services-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-4`}>
-              {t.servicesTitle}
-            </h3>
-            <p className={`text-center ${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} mb-12 max-w-2xl mx-auto`}>
-              {t.servicesSubtitle}
-            </p>
+            <h3 id="services-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-4`}>{t.servicesTitle}</h3>
+            <p className={`text-center ${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} mb-12 max-w-2xl mx-auto`}>{t.servicesSubtitle}</p>
             <div className="grid md:grid-cols-2 gap-6" role="list">
               {services[lang].map((service, index) => (
                 <div key={index} className="bg-linen p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow" role="listitem">
@@ -454,11 +450,53 @@ function App() {
           </div>
         </section>
 
-        <section className={`py-16 px-4 ${sectionBgClass}`} aria-labelledby="myths-title">
+        <section className={`py-16 px-4 ${sectionBgClass}`} aria-labelledby="booking-title">
+          <div className="max-w-2xl mx-auto">
+            <h3 id="booking-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-4`}>{t.bookingTitle}</h3>
+            <p className={`text-center ${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} mb-8`}>{t.bookingSubtitle}</p>
+            <form onSubmit={handleBooking} className="space-y-4 bg-linen p-8 rounded-xl">
+              <div>
+                <label className="block text-charcoal mb-2">{t.selectService}</label>
+                <select value={bookingForm.service} onChange={(e) => setBookingForm({...bookingForm, service: e.target.value})} className="w-full p-3 rounded-lg bg-cream text-charcoal border border-sage" required>
+                  <option value="">{t.selectService}</option>
+                  <option value="initial">{services[lang][0].title}</option>
+                  <option value="followup">{services[lang][1].title}</option>
+                  <option value="prenatal">{services[lang][2].title}</option>
+                  <option value="pumping">{services[lang][3].title}</option>
+                </select>
+              </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-charcoal mb-2">{t.yourName}</label>
+                  <input type="text" value={bookingForm.name} onChange={(e) => setBookingForm({...bookingForm, name: e.target.value})} className="w-full p-3 rounded-lg bg-cream text-charcoal border border-sage" required />
+                </div>
+                <div>
+                  <label className="block text-charcoal mb-2">{t.yourPhone}</label>
+                  <input type="tel" value={bookingForm.phone} onChange={(e) => setBookingForm({...bookingForm, phone: e.target.value})} className="w-full p-3 rounded-lg bg-cream text-charcoal border border-sage" required />
+                </div>
+              </div>
+              <div>
+                <label className="block text-charcoal mb-2">{t.preferredTime}</label>
+                <select value={bookingForm.time} onChange={(e) => setBookingForm({...bookingForm, time: e.target.value})} className="w-full p-3 rounded-lg bg-cream text-charcoal border border-sage" required>
+                  <option value="">{t.preferredTime}</option>
+                  <option value="morning">{t.morning}</option>
+                  <option value="afternoon">{t.afternoon}</option>
+                  <option value="evening">{t.evening}</option>
+                  <option value="any">{t.anyTime}</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-charcoal mb-2">{t.additionalNotes}</label>
+                <textarea value={bookingForm.notes} onChange={(e) => setBookingForm({...bookingForm, notes: e.target.value})} className="w-full p-3 rounded-lg bg-cream text-charcoal border border-sage" rows="3"></textarea>
+              </div>
+              <button type="submit" className="w-full bg-peach hover:bg-peach-dark text-white font-semibold py-4 px-8 rounded-full transition-colors duration-300">{t.bookViaWhatsapp}</button>
+            </form>
+          </div>
+        </section>
+
+        <section className="py-16 px-4" aria-labelledby="myths-title">
           <div className="max-w-4xl mx-auto">
-            <h3 id="myths-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-12`}>
-              {t.mythsTitle}
-            </h3>
+            <h3 id="myths-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-12`}>{t.mythsTitle}</h3>
             <div className="grid md:grid-cols-2 gap-6" role="list">
               {displayedMyths.map((item, index) => (
                 <div key={index} className="bg-cream p-6 rounded-xl shadow-sm" role="listitem">
@@ -470,40 +508,42 @@ function App() {
           </div>
         </section>
 
-        <section className="py-16 px-4" aria-labelledby="tips-title">
+        <section className={`py-16 px-4 ${sectionBgClass}`} aria-labelledby="tips-title">
           <div className="max-w-4xl mx-auto text-center">
-            <h3 id="tips-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} mb-8`}>
-              {t.tipsTitle}
-            </h3>
+            <h3 id="tips-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} mb-8`}>{t.tipsTitle}</h3>
             <div className="bg-linen rounded-xl p-8 min-h-[120px] flex items-center justify-center" role="status" aria-live="polite" aria-atomic="true">
-              <p className={`text-xl ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} animate-fade-in`}>
-                {displayedTips[currentTipIndex]}
-              </p>
+              <p className={`text-xl ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} animate-fade-in`}>{displayedTips[currentTipIndex]}</p>
             </div>
             <div className="flex justify-center gap-2 mt-4" role="tablist" aria-label="Tip navigation">
               {displayedTips.map((_, index) => (
-                <span
-                  key={index}
-                  role="tab"
-                  aria-selected={index === currentTipIndex}
-                  aria-label={`Tip ${index + 1}`}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    index === currentTipIndex ? 'bg-peach' : 'bg-sage/30'
-                  }`}
-                />
+                <span key={index} role="tab" aria-selected={index === currentTipIndex} className={`w-2 h-2 rounded-full transition-colors ${index === currentTipIndex ? 'bg-peach' : 'bg-sage/30'}`} />
               ))}
             </div>
           </div>
         </section>
 
+        <section className="py-16 px-4" aria-labelledby="blog-title">
+          <div className="max-w-5xl mx-auto">
+            <h3 id="blog-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-4`}>{t.blogTitle}</h3>
+            <p className={`text-center ${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} mb-12 max-w-2xl mx-auto`}>{t.blogSubtitle}</p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {blogPosts[lang].map((post, index) => (
+                <article key={index} className="bg-linen p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                  <span className="text-xs font-semibold text-peach bg-cream px-3 py-1 rounded-full">{post.category}</span>
+                  <h4 className={`text-lg font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} mt-3 mb-2`}>{post.title}</h4>
+                  <p className={`text-sm ${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} mb-3`}>{post.excerpt}</p>
+                  <span className="text-xs text-sage">{post.readTime}</span>
+                </article>
+              ))}
+            </div>
+            <p className={`text-center mt-8 ${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'}`}>{t.blogComingSoon}</p>
+          </div>
+        </section>
+
         <section className={`py-16 px-4 ${sectionBgClass}`} aria-labelledby="faq-title">
           <div className="max-w-4xl mx-auto">
-            <h3 id="faq-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-4`}>
-              {t.faqTitle}
-            </h3>
-            <p className={`text-center ${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} mb-12 max-w-2xl mx-auto`}>
-              {t.faqSubtitle}
-            </p>
+            <h3 id="faq-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-4`}>{t.faqTitle}</h3>
+            <p className={`text-center ${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} mb-12 max-w-2xl mx-auto`}>{t.faqSubtitle}</p>
             <dl className="space-y-4">
               {faqs[lang].map((faq, index) => (
                 <div key={index} className="bg-cream rounded-xl p-6 shadow-sm">
@@ -516,16 +556,16 @@ function App() {
         </section>
 
         <section className="py-16 px-4" aria-labelledby="testimonials-title">
-          <div className="max-w-4xl mx-auto">
-            <h3 id="testimonials-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-12`}>
-              {t.testimonialsTitle}
-            </h3>
-            <div className="grid md:grid-cols-3 gap-6" role="list">
+          <div className="max-w-5xl mx-auto">
+            <h3 id="testimonials-title" className={`text-3xl font-heading ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} text-center mb-12`}>{t.testimonialsTitle}</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" role="list">
               {testimonials[lang].map((testimonial, index) => (
-                <blockquote key={index} className="bg-linen p-8 rounded-xl shadow-sm" role="listitem">
-                  <p className={`${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} italic mb-4`}>"{testimonial.quote}"</p>
-                  <cite className={`${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'} font-semibold not-italic`}>- {testimonial.name}</cite>
-                </blockquote>
+                <div key={index} className="bg-linen p-6 rounded-xl shadow-sm text-center" role="listitem">
+                  <img src={testimonial.photo} alt={testimonial.name} className="w-20 h-20 rounded-full mx-auto mb-4 object-cover" />
+                  <p className={`${theme === 'dark' ? 'text-dark-warm-gray' : 'text-warm-gray'} text-sm italic mb-3`}>"{testimonial.quote}"</p>
+                  <p className={`font-semibold ${theme === 'dark' ? 'text-dark-charcoal' : 'text-charcoal'}`}>{testimonial.name}</p>
+                  <p className="text-xs text-sage mt-1">{testimonial.babyAge}</p>
+                </div>
               ))}
             </div>
           </div>
@@ -533,18 +573,8 @@ function App() {
 
         <section className="py-16 px-4 bg-olive text-cream text-center" aria-labelledby="contact-title">
           <h3 id="contact-title" className="text-3xl font-heading mb-4">{t.contactTitle}</h3>
-          <p className="text-lg mb-8 opacity-90 max-w-xl mx-auto">
-            {t.contactText}
-          </p>
-          <a
-            href={whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-cream text-olive font-semibold py-4 px-8 rounded-full hover:bg-peach transition-colors duration-300"
-            aria-label={t.whatsappAriaLabel}
-          >
-            {t.contactCta}
-          </a>
+          <p className="text-lg mb-8 opacity-90 max-w-xl mx-auto">{t.contactText}</p>
+          <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-block bg-cream text-olive font-semibold py-4 px-8 rounded-full hover:bg-peach transition-colors duration-300" aria-label={t.whatsappAriaLabel}>{t.contactCta}</a>
         </section>
       </main>
 
