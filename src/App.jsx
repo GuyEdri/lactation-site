@@ -101,7 +101,7 @@ function App() {
       <section className="py-16 px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <img 
-            src="https://images.unsplash.com/photo-1555244162-803834f70033?w=600&h=400&fit=crop" 
+            src="https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=600&h=400&fit=crop" 
             alt="Mother and baby" 
             className="w-full h-64 md:h-80 object-cover rounded-2xl mb-8 shadow-lg"
           />
@@ -131,7 +131,7 @@ function App() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <img 
-                src="https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?w=500&h=400&fit=crop" 
+                src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&h=400&fit=crop" 
                 alt="Breastfeeding support" 
                 className="w-full h-64 object-cover rounded-xl shadow-md"
               />
