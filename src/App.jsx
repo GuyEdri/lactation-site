@@ -24,7 +24,10 @@ const translations = {
     footerTitle: "Esther Edri",
     footerSubtitle: "IBCLC Certified Breastfeeding Consultant",
     rights: "© 2026 All rights reserved",
-    lang: "עברית"
+    lang: "עברית",
+    skipLink: "Skip to main content",
+    langToggleLabel: "Switch to Hebrew",
+    whatsappAriaLabel: "Contact via WhatsApp"
   },
   he: {
     name: "אסתר אדרי",
@@ -49,7 +52,10 @@ const translations = {
     footerTitle: "אסתר אדרי",
     footerSubtitle: "יועצת הנקה מוסמכת IBCLC",
     rights: "© 2026 כל הזכויות שמורות",
-    lang: "English"
+    lang: "English",
+    skipLink: "דלג לתוכן הראשי",
+    langToggleLabel: "החלף לאנגלית",
+    whatsappAriaLabel: "צרי קשר בוואטסאפ"
   }
 }
 
@@ -102,7 +108,7 @@ const tips = {
     "הנקה מרובה בלילה היא נורמלית וזמנית",
     "תנוחות שכיבה יכולות להקל על היניקה",
     "שימי לב לסימני רעב - חיפוש, יד לפה",
-    "הנקה בלילה היא נורמלית ועוזר לבסס ייצור",
+    "הנקה בלילה היא נורמלית ועוזרת לבסס ייצור",
     "יניקה טובה צריכה להרגיש נוח אחרי ההתאמה הראשונית",
     "לחיצה על השד יכולה לעזור לתינוק לקבל יותר חלב",
     "האכלה בקצב מבוקר עוזרת אם יש תוספת"
@@ -189,178 +195,190 @@ function App() {
   const isRTL = lang === 'he'
 
   return (
-    <div className="min-h-screen bg-cream" dir={isRTL ? 'rtl' : 'ltr'}>
-      <header className="py-6 px-4 flex justify-between items-center max-w-6xl mx-auto">
+    <div className="min-h-screen bg-cream" dir={isRTL ? 'rtl' : 'ltr'} lang={lang}>
+      <a href="#main-content" className="skip-link">
+        {t.skipLink}
+      </a>
+
+      <header className="py-6 px-4 flex justify-between items-center max-w-6xl mx-auto" role="banner">
         <h1 className="text-2xl font-heading text-charcoal">{t.name}</h1>
         <button
           onClick={() => setLang(lang === 'en' ? 'he' : 'en')}
           className="bg-linen text-charcoal px-4 py-2 rounded-full font-semibold hover:bg-peach hover:text-white transition-colors"
+          aria-label={t.langToggleLabel}
         >
           {t.lang}
         </button>
       </header>
 
-      <section className="py-16 px-4 text-center">
-        <div className="max-w-4xl mx-auto">
-          <img 
-            src="https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&h=500&fit=crop" 
-            alt="Mother breastfeeding her baby" 
-            className="w-full h-72 md:h-96 object-cover rounded-2xl mb-8 shadow-lg"
-          />
-          <p className="text-peach font-semibold mb-2">{t.title}</p>
-          <h2 className="text-4xl md:text-5xl font-heading text-charcoal mb-4 max-w-3xl mx-auto">
-            {t.heroTitle}
-          </h2>
-          <p className="text-xl text-warm-gray mb-8 max-w-2xl mx-auto">
-            {t.heroSubtitle}
+      <main id="main-content">
+        <section className="py-16 px-4 text-center" aria-labelledby="hero-title">
+          <div className="max-w-4xl mx-auto">
+            <img 
+              src="https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=800&h=500&fit=crop" 
+              alt="Mother holding and breastfeeding her smiling baby in a warm, natural light setting" 
+              className="w-full h-72 md:h-96 object-cover rounded-2xl mb-8 shadow-lg"
+            />
+            <p className="text-peach font-semibold mb-2">{t.title}</p>
+            <h2 id="hero-title" className="text-4xl md:text-5xl font-heading text-charcoal mb-4 max-w-3xl mx-auto">
+              {t.heroTitle}
+            </h2>
+            <p className="text-xl text-warm-gray mb-8 max-w-2xl mx-auto">
+              {t.heroSubtitle}
+            </p>
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-peach hover:bg-peach-dark text-white font-semibold py-4 px-8 rounded-full transition-colors duration-300"
+              aria-label={t.whatsappAriaLabel}
+            >
+              {t.cta}
+            </a>
+          </div>
+        </section>
+
+        <div className="h-16 bg-gradient-to-b from-cream to-linen" aria-hidden="true"></div>
+
+        <section className="py-16 px-4 bg-linen" aria-labelledby="about-title">
+          <div className="max-w-4xl mx-auto">
+            <h3 id="about-title" className="text-3xl font-heading text-charcoal text-center mb-8">
+              {t.aboutTitle}
+            </h3>
+            <div className={`grid md:grid-cols-2 gap-8 items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
+              <div>
+                <img 
+                  src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&h=500&fit=crop" 
+                  alt="Mother peacefully breastfeeding her newborn in a cozy home setting, showing skin-to-skin contact" 
+                  className="w-full h-72 object-cover rounded-xl shadow-md"
+                />
+              </div>
+              <div className="text-warm-gray">
+                <p className="mb-4">{t.aboutText1}</p>
+                <p className="mb-4">{t.aboutText2}</p>
+                <p>{t.aboutText3}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div className="h-16 bg-gradient-to-b from-linen to-cream" aria-hidden="true"></div>
+
+        <section className="py-16 px-4" aria-labelledby="services-title">
+          <div className="max-w-5xl mx-auto">
+            <h3 id="services-title" className="text-3xl font-heading text-charcoal text-center mb-4">
+              {t.servicesTitle}
+            </h3>
+            <p className="text-center text-warm-gray mb-12 max-w-2xl mx-auto">
+              {t.servicesSubtitle}
+            </p>
+            <div className="grid md:grid-cols-2 gap-6" role="list">
+              {services[lang].map((service, index) => (
+                <div key={index} className="bg-linen p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow" role="listitem">
+                  <span className="text-4xl mb-4 block" aria-hidden="true">{service.icon}</span>
+                  <h4 className="text-xl font-heading text-charcoal mb-2">{service.title}</h4>
+                  <p className="text-warm-gray">{service.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 px-4 bg-linen" aria-labelledby="myths-title">
+          <div className="max-w-4xl mx-auto">
+            <h3 id="myths-title" className="text-3xl font-heading text-charcoal text-center mb-12">
+              {t.mythsTitle}
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6" role="list">
+              {displayedMyths.map((item, index) => (
+                <div key={index} className="bg-cream p-6 rounded-xl shadow-sm" role="listitem">
+                  <p className="font-semibold text-peach-dark mb-2">{item.myth}</p>
+                  <p className="text-sage font-medium">{item.fact}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 px-4" aria-labelledby="tips-title">
+          <div className="max-w-4xl mx-auto text-center">
+            <h3 id="tips-title" className="text-3xl font-heading text-charcoal mb-8">
+              {t.tipsTitle}
+            </h3>
+            <div className="bg-linen rounded-xl p-8 min-h-[120px] flex items-center justify-center" role="status" aria-live="polite" aria-atomic="true">
+              <p className="text-xl text-charcoal animate-fade-in">
+                {displayedTips[currentTipIndex]}
+              </p>
+            </div>
+            <div className="flex justify-center gap-2 mt-4" role="tablist" aria-label="Tip navigation">
+              {displayedTips.map((_, index) => (
+                <span
+                  key={index}
+                  role="tab"
+                  aria-selected={index === currentTipIndex}
+                  aria-label={`Tip ${index + 1}`}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    index === currentTipIndex ? 'bg-peach' : 'bg-sage/30'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 px-4 bg-linen" aria-labelledby="faq-title">
+          <div className="max-w-4xl mx-auto">
+            <h3 id="faq-title" className="text-3xl font-heading text-charcoal text-center mb-4">
+              {t.faqTitle}
+            </h3>
+            <p className="text-center text-warm-gray mb-12 max-w-2xl mx-auto">
+              {t.faqSubtitle}
+            </p>
+            <dl className="space-y-4">
+              {faqs[lang].map((faq, index) => (
+                <div key={index} className="bg-cream rounded-xl p-6 shadow-sm">
+                  <dt className="text-lg font-heading text-charcoal mb-2">{faq.question}</dt>
+                  <dd className="text-warm-gray">{faq.answer}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
+        <section className="py-16 px-4" aria-labelledby="testimonials-title">
+          <div className="max-w-4xl mx-auto">
+            <h3 id="testimonials-title" className="text-3xl font-heading text-charcoal text-center mb-12">
+              {t.testimonialsTitle}
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6" role="list">
+              {testimonials[lang].map((testimonial, index) => (
+                <blockquote key={index} className="bg-linen p-8 rounded-xl shadow-sm" role="listitem">
+                  <p className="text-warm-gray italic mb-4">"{testimonial.quote}"</p>
+                  <cite className="text-charcoal font-semibold not-italic">- {testimonial.name}</cite>
+                </blockquote>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 px-4 bg-olive text-cream text-center" aria-labelledby="contact-title">
+          <h3 id="contact-title" className="text-3xl font-heading mb-4">{t.contactTitle}</h3>
+          <p className="text-lg mb-8 opacity-90 max-w-xl mx-auto">
+            {t.contactText}
           </p>
           <a
             href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-peach hover:bg-peach-dark text-white font-semibold py-4 px-8 rounded-full transition-colors duration-300"
+            className="inline-block bg-cream text-olive font-semibold py-4 px-8 rounded-full hover:bg-peach transition-colors duration-300"
+            aria-label={t.whatsappAriaLabel}
           >
-            {t.cta}
+            {t.contactCta}
           </a>
-        </div>
-      </section>
+        </section>
+      </main>
 
-      <div className="h-16 bg-gradient-to-b from-cream to-linen"></div>
-
-      <section className="py-16 px-4 bg-linen">
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-3xl font-heading text-charcoal text-center mb-8">
-            {t.aboutTitle}
-          </h3>
-          <div className={`grid md:grid-cols-2 gap-8 items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <div>
-              <img 
-                src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=600&h=500&fit=crop" 
-                alt="Mother breastfeeding her newborn" 
-                className="w-full h-72 object-cover rounded-xl shadow-md"
-              />
-            </div>
-            <div className="text-warm-gray">
-              <p className="mb-4">{t.aboutText1}</p>
-              <p className="mb-4">{t.aboutText2}</p>
-              <p>{t.aboutText3}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div className="h-16 bg-gradient-to-b from-linen to-cream"></div>
-
-      <section className="py-16 px-4">
-        <div className="max-w-5xl mx-auto">
-          <h3 className="text-3xl font-heading text-charcoal text-center mb-4">
-            {t.servicesTitle}
-          </h3>
-          <p className="text-center text-warm-gray mb-12 max-w-2xl mx-auto">
-            {t.servicesSubtitle}
-          </p>
-          <div className="grid md:grid-cols-2 gap-6">
-            {services[lang].map((service, index) => (
-              <div key={index} className="bg-linen p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                <span className="text-4xl mb-4 block">{service.icon}</span>
-                <h4 className="text-xl font-heading text-charcoal mb-2">{service.title}</h4>
-                <p className="text-warm-gray">{service.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 px-4 bg-linen">
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-3xl font-heading text-charcoal text-center mb-12">
-            {t.mythsTitle}
-          </h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            {displayedMyths.map((item, index) => (
-              <div key={index} className="bg-cream p-6 rounded-xl shadow-sm">
-                <p className="font-semibold text-peach-dark mb-2">{item.myth}</p>
-                <p className="text-sage font-medium">{item.fact}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-3xl font-heading text-charcoal mb-8">
-            {t.tipsTitle}
-          </h3>
-          <div className="bg-linen rounded-xl p-8 min-h-[120px] flex items-center justify-center">
-            <p className="text-xl text-charcoal animate-fade-in">
-              {displayedTips[currentTipIndex]}
-            </p>
-          </div>
-          <div className="flex justify-center gap-2 mt-4">
-            {displayedTips.map((_, index) => (
-              <span
-                key={index}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentTipIndex ? 'bg-peach' : 'bg-sage/30'
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 px-4 bg-linen">
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-3xl font-heading text-charcoal text-center mb-4">
-            {t.faqTitle}
-          </h3>
-          <p className="text-center text-warm-gray mb-12 max-w-2xl mx-auto">
-            {t.faqSubtitle}
-          </p>
-          <div className="space-y-4">
-            {faqs[lang].map((faq, index) => (
-              <div key={index} className="bg-cream rounded-xl p-6 shadow-sm">
-                <h4 className="text-lg font-heading text-charcoal mb-2">{faq.question}</h4>
-                <p className="text-warm-gray">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-3xl font-heading text-charcoal text-center mb-12">
-            {t.testimonialsTitle}
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials[lang].map((testimonial, index) => (
-              <div key={index} className="bg-linen p-8 rounded-xl shadow-sm">
-                <p className="text-warm-gray italic mb-4">"{testimonial.quote}"</p>
-                <p className="text-charcoal font-semibold">- {testimonial.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 px-4 bg-olive text-cream text-center">
-        <h3 className="text-3xl font-heading mb-4">{t.contactTitle}</h3>
-        <p className="text-lg mb-8 opacity-90 max-w-xl mx-auto">
-          {t.contactText}
-        </p>
-        <a
-          href={whatsappLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block bg-cream text-olive font-semibold py-4 px-8 rounded-full hover:bg-peach transition-colors duration-300"
-        >
-          {t.contactCta}
-        </a>
-      </section>
-
-      <footer className="py-8 px-4 text-center text-warm-gray bg-linen">
+      <footer className="py-8 px-4 text-center text-warm-gray bg-linen" role="contentinfo">
         <p className="font-heading text-lg">{t.footerTitle}</p>
         <p className="text-sm mt-1">{t.footerSubtitle}</p>
         <p className="text-sm mt-4">{t.rights}</p>
